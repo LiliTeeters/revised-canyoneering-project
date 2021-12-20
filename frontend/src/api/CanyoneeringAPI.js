@@ -23,14 +23,28 @@ const tryCatchFetch = async (url, init = null) => {
   }
   
   const fetchCanyonByID = async (canyonID) => {
-    const url = BASE_URL + `${canyonID}/`
+    const url = BASE_URL + `canyons/${canyonID}/`
     return await tryCatchFetch(url)
   }
+
+  const fetchUsers = async () => {
+    const url = BASE_URL
+    return await tryCatchFetch(url + `canyons/`)
+  }
+  
+  const fetchUserByID = async (userID) => {
+    const url = BASE_URL + `canyons/${userID}/`
+    return await tryCatchFetch(url)
+  }
+
+
     
   
   const exportItems = {
     fetchCanyons,
     fetchCanyonByID,
+    fetchUserByID,
+    fetchUsers,
   }
   
   export default exportItems
