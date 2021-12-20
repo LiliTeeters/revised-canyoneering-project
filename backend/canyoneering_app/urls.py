@@ -2,11 +2,12 @@
 from django.urls import path
 from canyoneering_app.views import *
 
-from .views import CanyonViewSet # This library gives us all of the functions usually found in views.py
+from .views import CanyonViewSet, UserViewSet # This library gives us all of the functions usually found in views.py
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'', CanyonViewSet, basename='canyon')
+# router.register(r'users', UserViewSet, basename='user')
 urlpatterns = router.urls
 
 # urlpatterns = [

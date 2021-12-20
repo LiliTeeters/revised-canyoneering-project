@@ -5,8 +5,8 @@ class User(models.Model):
     user_name = models.CharField(max_length=255)
     email = models.CharField(max_length=50)
     
-    def _str_(self):
-        return f"{self.user_name}"
+    def __str__(self):
+        return f"{self.user_name} {self.email}"
 
 class Canyon_Details(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='canyon', null=True)
@@ -21,5 +21,5 @@ class Canyon_Details(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return f"{self.canyon_name} /n{self.rating} /n{self.length} /n{self.gear} /n{self.rappels} /n{self.water} /n{self.flashflood} /n{self.access} /n{self.description}"
+        return f"{self.canyon_name} {self.rating} {self.length} {self.gear} {self.rappels} {self.water} {self.flashflood} {self.access} {self.description}"
 
