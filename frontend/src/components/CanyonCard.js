@@ -6,7 +6,7 @@ const CanyonCard = (props) => {
     const navigate = useNavigate()
 
 const canyonPage = () => {
-    console.log(el)
+    // console.log(el)
     navigate(`/canyons/${el.id}`)
 }
 

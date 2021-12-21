@@ -6,11 +6,16 @@ import CanyonPage from './pages/CanyonPage';
 import  CanyoneeringAPI  from './api/CanyoneeringAPI';
 import { useEffect, useState } from 'react';
 import UserLoginPage from "./pages/UserLoginPage";
-// import FavoriteCanyonList from './components/FavoriteCanyonsCard';
+
 import FavoritesPage from './pages/FavoritesPage';
+import UserContext from './contexts/UserContext';
+import SignupPage from './pages/SignupPage';
 
 function App() {
   const [canyons, setCanyons] = useState([])
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [ user, setUser ] = useState(null);
+  const [error, setError] = useState(null);
   
 
   useEffect(() => {
@@ -19,18 +24,62 @@ function App() {
     }
     getCanyons()
   },[])
+
+  useEffect(() => {
+    const getUser = async () => {
+      if (localStorage.getItem("auth-user") !== 'null') {
+        let response = await CanyoneeringAPI.getLoggedInUser(localStorage.getItem("auth-user"));
+        let data = await response.json();
+        // console.log(data)
+        if (data.username) {
+          setIsLoggedIn(true);
+          setUser(data);
+        }
+      }
+    }
+    if (!user) {
+      getUser();
+    }
+  }, [user])
+
+  const handleLogin = async (evt) => {
+    evt.preventDefault();
+    let userObject = {
+      username: evt.target.elements[0].value,
+      password: evt.target.elements[1].value,
+    }
+    let response = await CanyoneeringAPI.login(userObject);
+    let data = await response.json();
+    // console.log(data)
+    if (data.token) {
+      localStorage.setItem("auth-user", `${data.token}`);
+      setIsLoggedIn(true);
+      setUser(data.user);
+    }
+  }
+
+  const handleLogout = () => {
+    localStorage.setItem("auth-user", null);
+    setIsLoggedIn(false);
+    setUser(null);
+  }
+
   
 
   return (
     <div className="App">
       <BrowserRouter>
+      <UserContext.Provider value={{ user: user, setUser: handleLogin, error: error }}>
         <Routes>
-          <Route exact path="/" element={ <HomePage canyons={canyons}/> }/>
+          <Route exact path="/" element={ <HomePage canyons={canyons} isLoggedIn={isLoggedIn} handleLogout={handleLogout}/> }/>
           <Route exact path="/canyons/:canyonID" element={ <CanyonPage /> } />
-          <Route exact path="/login/" element={ <UserLoginPage /> } />
+          <Route exact path="/login/" element={ <UserLoginPage  isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout} user={user} /> } />
+          <Route exact path="/signup/" element={<SignupPage/>}/>
+
           <Route exact path="/canyons/:userID/usercanyons/" element={<FavoritesPage/>}/>
       
         </Routes>
+        </UserContext.Provider>
       </BrowserRouter>
       
     </div>

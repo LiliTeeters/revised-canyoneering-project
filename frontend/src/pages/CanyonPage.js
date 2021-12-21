@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import CanyoneeringAPI from '../api/CanyoneeringAPI';
+import FavoritesPage from "./FavoritesPage";
 
 
 
@@ -36,6 +37,7 @@ function CanyonPage(props) {
                 <p>Flashflood: {canyon.flashflood}</p>
                 <p>Access: {canyon.access}</p>
                 <p>Description: {canyon.description}</p>
+                <button onClick={FavoritesPage}>Add To Favorites</button>
             </div>
         )
     }

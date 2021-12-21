@@ -1,7 +1,7 @@
 import {Table} from "react-bootstrap"
 import { Link } from "react-router-dom"
 
-const FavoriteCanyonList= (props) => {
+const FavoriteCanyons= (props) => {
 
     const listFavoriteCanyons = () => {
         if (!props.Canyon_Details)
@@ -33,4 +33,4 @@ const FavoriteCanyonList= (props) => {
     )
 }
 
-export default FavoriteCanyonList
+export default FavoriteCanyons

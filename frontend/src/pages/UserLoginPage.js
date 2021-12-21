@@ -1,33 +1,26 @@
 import { useNavigate } from "react-router-dom"
 import { Form, Button } from "react-bootstrap"
 import CanyoneeringAPI from "../api/CanyoneeringAPI"
+import { Link } from 'react-router-dom'
+
 
 function UserLoginPage(props) {
-  // router props
-  const navigate = useNavigate()
+  const {isLoggedIn, handleLogout, handleLogin} = props
 
-  // handlers
-  const handleFormSubmit = async (event) => {
-    event.preventDefault()
-    
-    const userData = {
-      name: event.target.elements[0].value,
-      email: event.target.elements[1].value,
-    
-    }
-
-    const data = await CanyoneeringAPI.addUser(userData)
-    if (data) {
-      navigate(`/users/${data.id}`)
-    }
+  if (isLoggedIn) {
+    return <div>
+      <button onClick={handleLogout}>Logout</button>
+      <div>
+        <Link to='/'>Home</Link>
+      </div>
+    </div>
   }
-
   // render
   return (
     <div>
       <h2>Login User</h2>
       <hr />
-      <Form onSubmit={handleFormSubmit}>
+      <Form onSubmit={handleLogin}>
         <Form.Group>
           <Form.Label>Username</Form.Label>
           <Form.Control placeholder="username" />

@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 #         return f"{self.user_name} {self.email}"
 
 class Canyon_Details(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='canyon', null=True)
+    user = models.ManyToManyField(User, related_name='canyon')
     canyon_name = models.CharField(max_length=255)
     rating = models.CharField(max_length=8)
     length = models.CharField(max_length=15)

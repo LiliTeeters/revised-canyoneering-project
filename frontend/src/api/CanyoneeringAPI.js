@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000/api/"
+const BASE_URL = "http://localhost:8000/canyons/"
 
 
 const tryCatchFetch = async (url, init = null) => {
@@ -27,15 +27,6 @@ const tryCatchFetch = async (url, init = null) => {
     return await tryCatchFetch(url)
   }
 
-  const fetchUsers = async () => {
-    const url = BASE_URL
-    return await tryCatchFetch(url + `canyons/`)
-  }
-  
-  const fetchUserByID = async (userID) => {
-    const url = BASE_URL + `canyons/${userID}/`
-    return await tryCatchFetch(url)
-  }
 // ------------------------------User Functions -----------
   const login = (userObject) => {
     return fetch('http://localhost:8000/token-auth/', {
@@ -48,7 +39,7 @@ const tryCatchFetch = async (url, init = null) => {
   };
   
   const getLoggedInUser = (token) => {
-    return fetch('http://localhost:8000/api/canyons/current_user/', {
+    return fetch('http://localhost:8000/canyons/current_user/', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `JWT ${token}`
@@ -57,7 +48,7 @@ const tryCatchFetch = async (url, init = null) => {
   };
   
   const signupUser = (userObject) => {
-    return fetch('http://localhost:8000/api/canyons/users/', {
+    return fetch('http://localhost:8000/canyons/users/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -70,11 +61,9 @@ const tryCatchFetch = async (url, init = null) => {
   const exportItems = {
     fetchCanyons,
     fetchCanyonByID,
-    fetchUserByID,
-    fetchUsers,
     login, 
     getLoggedInUser, 
-    signupUser
+    signupUser,
   }
   
   export default exportItems
