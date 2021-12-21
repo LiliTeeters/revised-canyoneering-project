@@ -36,8 +36,35 @@ const tryCatchFetch = async (url, init = null) => {
     const url = BASE_URL + `canyons/${userID}/`
     return await tryCatchFetch(url)
   }
-
-
+// ------------------------------User Functions -----------
+  const login = (userObject) => {
+    return fetch('http://localhost:8000/token-auth/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userObject)
+    }).then(res => res)
+  };
+  
+  const getLoggedInUser = (token) => {
+    return fetch('http://localhost:8000/api/canyons/current_user/', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `JWT ${token}`
+      }
+    }).then(res => res)
+  };
+  
+  const signupUser = (userObject) => {
+    return fetch('http://localhost:8000/api/canyons/users/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userObject)
+    }).then(res => res)
+  };
     
   
   const exportItems = {
@@ -45,6 +72,10 @@ const tryCatchFetch = async (url, init = null) => {
     fetchCanyonByID,
     fetchUserByID,
     fetchUsers,
+    login, 
+    getLoggedInUser, 
+    signupUser
   }
   
   export default exportItems
+

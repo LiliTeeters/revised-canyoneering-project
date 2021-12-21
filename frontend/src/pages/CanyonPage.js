@@ -5,8 +5,6 @@ import CanyoneeringAPI from '../api/CanyoneeringAPI';
 
 
 function CanyonPage(props) {
-
-
     const [canyon, setCanyon] = useState(null)
 
     // router props
@@ -20,7 +18,6 @@ function CanyonPage(props) {
                 setCanyon(data)
             }
         }
-
         getCanyon()
     }, [params.canyonID])
 

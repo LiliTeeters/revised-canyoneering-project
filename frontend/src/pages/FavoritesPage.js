@@ -11,10 +11,10 @@ const FavoritesPage = (props) => {
 
     useEffect(() => {
         const getUser = async () => {
-            const userObj = await CanyoneeringAPI.fetchUserByID(params.userID)
+            const data = await CanyoneeringAPI.fetchUserByID(params.userID)
 
             const canyonArray = []
-             for (let i of userObj.canyon) {
+             for (let i of data) {
                  const canyonObj = await CanyoneeringAPI.fetchCanyonByID(i)
                  canyonArray.push(canyonObj)
              }
@@ -27,7 +27,10 @@ const FavoritesPage = (props) => {
     return (
         <div>
             <h1> Favorites </h1>
-            <FavoriteCanyonList canyons={canyon}/>
+            {/* <FavoriteCanyonList canyons={canyon.canyon_name}/> */}
+            <h3>Name: {canyon.canyon_name}</h3>
+                <p>Ratin: {canyon.rating}</p>
+                <p>Length: {canyon.length}</p>
 
         </div>
     )

@@ -9,6 +9,10 @@ router = DefaultRouter()
 router.register(r'', CanyonViewSet, basename='canyon')
 # router.register(r'users', UserViewSet, basename='user')
 urlpatterns = router.urls
+urlpatterns.append(path('current_user/', current_user))
+urlpatterns.append(path('users/', UserList.as_view()))
+# path('current_user/', current_user),
+# path('users/', UserList.as_view())
 
 # urlpatterns = [
 #     path('', canyons_list, name='canyons_list'),

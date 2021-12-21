@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { Form, Button } from "react-bootstrap"
 import CanyoneeringAPI from "../api/CanyoneeringAPI"
 
-function CreateUser(props) {
+function UserLoginPage(props) {
   // router props
   const navigate = useNavigate()
 
@@ -25,25 +25,25 @@ function CreateUser(props) {
   // render
   return (
     <div>
-      <h2>Add User Page</h2>
+      <h2>Login User</h2>
       <hr />
       <Form onSubmit={handleFormSubmit}>
         <Form.Group>
-          <Form.Label>Name</Form.Label>
-          <Form.Control placeholder="name" />
+          <Form.Label>Username</Form.Label>
+          <Form.Control placeholder="username" />
         </Form.Group>
         <br />
         <Form.Group>
-          <Form.Label>Email</Form.Label>
-          <Form.Control placeholder="email" />
+          <Form.Label>Password</Form.Label>
+          <Form.Control placeholder="password" />
         </Form.Group>
         <br />
         <Button type="submit">
-          Add User
+          Login
         </Button>  
       </Form>  
     </div>
   )
 }
 
-export default CreateUser
+export default UserLoginPage
