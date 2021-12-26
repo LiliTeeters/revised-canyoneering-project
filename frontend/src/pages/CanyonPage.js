@@ -22,6 +22,10 @@ function CanyonPage(props) {
         getCanyon()
     }, [params.canyonID])
 
+    const addCanyon = () => {
+
+    }
+
     // render
     const renderCanyon = () => {
         if (!canyon)
@@ -37,7 +41,7 @@ function CanyonPage(props) {
                 <p>Flashflood: {canyon.flashflood}</p>
                 <p>Access: {canyon.access}</p>
                 <p>Description: {canyon.description}</p>
-                <button onClick={FavoritesPage}>Add To Favorites</button>
+                <button onClick={addCanyon}>Add To Favorites</button>
             </div>
         )
     }

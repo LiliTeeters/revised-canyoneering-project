@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class CanyonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Canyon_Details
-        fields = ['id','canyon_name', 'rating', 'length', 'gear', 'rappels', 'water', 'flashflood', 'access', 'description']
+        fields = ['id','user','canyon_name', 'rating', 'length', 'gear', 'rappels', 'water', 'flashflood', 'access', 'description']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

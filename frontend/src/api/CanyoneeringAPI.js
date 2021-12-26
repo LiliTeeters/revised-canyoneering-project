@@ -27,8 +27,22 @@ const tryCatchFetch = async (url, init = null) => {
     return await tryCatchFetch(url)
   }
 
+  const addToUserFavorites = async(userID, canyonID)=>{
+    const url = BASE_URL + `canyons/${canyonID}/`
+    const init = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userID)
+    }
+    return await tryCatchFetch(url,init)
+  
+  }
+
 // ------------------------------User Functions -----------
   const login = (userObject) => {
+    console.log(userObject)
     return fetch('http://localhost:8000/token-auth/', {
       method: 'POST',
       headers: {
@@ -64,6 +78,7 @@ const tryCatchFetch = async (url, init = null) => {
     login, 
     getLoggedInUser, 
     signupUser,
+    addToUserFavorites,
   }
   
   export default exportItems

@@ -2,7 +2,10 @@ import CanyonCard from "../components/CanyonCard"
 import { Link } from "react-router-dom"
 import React, { useContext } from 'react';
 import UserContext from '../contexts/UserContext.js';
+import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api';
 
+// API KEY
+// AIzaSyD1BNN7_egNB1BIP1tHEl_Ef5IG6qlwtaE
 function HomePage(props) {
     const {canyons , isLoggedIn, handleLogout} = props
     // console.log(canyons)
@@ -45,6 +48,11 @@ function HomePage(props) {
             })}
 
         
+        </div>
+        <div>
+          
+          <iframe title="unique title" width="600" height="450"  loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD1BNN7_egNB1BIP1tHEl_Ef5IG6qlwtaE&q=Utah"/>
+
         </div>
         
         </div>
