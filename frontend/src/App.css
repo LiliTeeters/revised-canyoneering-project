@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color:rgb(252, 252, 252);
 }
 
 .App-logo {
@@ -45,10 +46,11 @@
 }
 
 .canyonCard {
-  max-width: max-content;
+  max-width:min-content;
   border-radius: 1em;
   background-color: rgb(208, 210, 210);
   padding: 1em;
+  font-size: medium;
   margin: 2em;
   height: auto;
 

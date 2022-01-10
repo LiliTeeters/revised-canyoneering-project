@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 import { Form, Button } from "react-bootstrap"
-import CanyoneeringAPI from "../api/CanyoneeringAPI"
+// import CanyoneeringAPI from "../api/CanyoneeringAPI"
 import { Link } from 'react-router-dom'
 
 

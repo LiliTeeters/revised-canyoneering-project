@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import CanyoneeringAPI from '../api/CanyoneeringAPI';
-import FavoritesPage from "./FavoritesPage";
+// import FavoritesPage from "./FavoritesPage";
 
 
 
@@ -33,7 +33,7 @@ function CanyonPage(props) {
         return (
             <div>
                 <h3>Name: {canyon.canyon_name}</h3>
-                <p>Ratin: {canyon.rating}</p>
+                <p>Rating: {canyon.rating}</p>
                 <p>Length: {canyon.length}</p>
                 <p>Gear: {canyon.gear}</p>
                 <p>Rappels: {canyon.rappels}</p>
