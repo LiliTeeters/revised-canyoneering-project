@@ -1,4 +1,5 @@
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -136,8 +137,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
 ]
 
-CORS_ORIGIN_WHITELIST = ['https://localhost:8000','http://localhost:8000']
+CORS_ORIGIN_WHITELIST = ['https://localhost:3000','http://localhost:3000']
 
 JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'canyoneering_api.utils.my_jwt_response_handler'
+    
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'canyoneering_api.utils.my_jwt_response_handler',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
 }

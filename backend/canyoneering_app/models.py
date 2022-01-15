@@ -20,7 +20,9 @@ class Canyon_Details(models.Model):
     flashflood = models.CharField(max_length=255)
     access = models.CharField(max_length=10)
     description = models.TextField()
+    latitude = models.CharField(max_length=10, default='')
+    longitude = models.CharField(max_length=10, default='')
 
     def __str__(self):
-        return f"{self.canyon_name} {self.rating} {self.length} {self.gear} {self.rappels} {self.water} {self.flashflood} {self.access} {self.description}"
+        return f"{self.canyon_name} {self.rating} {self.length} {self.gear} {self.rappels} {self.water} {self.flashflood} {self.access} {self.description} {self.latitude} {self.longitude}"
 

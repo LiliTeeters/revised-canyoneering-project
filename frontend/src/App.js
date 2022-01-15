@@ -6,10 +6,10 @@ import CanyonPage from './pages/CanyonPage';
 import  CanyoneeringAPI  from './api/CanyoneeringAPI';
 import { useEffect, useState } from 'react';
 import UserLoginPage from "./pages/UserLoginPage";
-
-import FavoritesPage from './pages/FavoritesPage';
 import UserContext from './contexts/UserContext';
 import SignupPage from './pages/SignupPage';
+import AddCanyonPage from './pages/AddCanyonPage';
+import DeleteCanyonPage from './pages/DeleteCanyonPage';
 
 function App() {
   const [canyons, setCanyons] = useState([])
@@ -18,19 +18,18 @@ function App() {
   const [error, setError] = useState(null);
   
 
-  useEffect(() => {
-    const getCanyons = async() => {
-    await CanyoneeringAPI.fetchCanyons().then((data) => setCanyons(data))
-    }
-    getCanyons()
-  },[])
+  // useEffect(() => {
+  //   const getCanyons = async() => {
+  //   await CanyoneeringAPI.fetchCanyons().then((data) => setCanyons(data))
+  //   }
+  //   getCanyons()
+  // },[])
 
   useEffect(() => {
     const getUser = async () => {
       if (localStorage.getItem("auth-user") !== 'null') {
         let response = await CanyoneeringAPI.getLoggedInUser(localStorage.getItem("auth-user"));
         let data = await response.json();
-        // console.log(data)
         if (data.username) {
           setIsLoggedIn(true);
           setUser(data);
@@ -75,8 +74,9 @@ function App() {
           <Route exact path="/canyons/:canyonID" element={ <CanyonPage /> } />
           <Route exact path="/login/" element={ <UserLoginPage  isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout} user={user} /> } />
           <Route exact path="/signup/" element={<SignupPage/>}/>
-
-          <Route exact path="/canyons/:userID/usercanyons/" element={<FavoritesPage/>}/>
+          <Route exact path="/addcanyon/" element={<AddCanyonPage/>}/>
+          <Route exact path="/canyons/:canyonID/delete/" element={<DeleteCanyonPage />} />
+          {/* <Route exact path="/canyons/:userID/usercanyons/" element={<FavoritesPage/>}/> */}
       
         </Routes>
         </UserContext.Provider>

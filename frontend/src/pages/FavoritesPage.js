@@ -3,7 +3,6 @@ import  CanyoneeringAPI  from '../api/CanyoneeringAPI';
 import { useEffect, useState } from 'react';
 import FavoriteCanyons from "../components/FavoriteCanyons";
 
-
 const FavoritesPage = (props) => {
     const [canyon, setCanyon] = useState([])
     const params = useParams()
@@ -12,24 +11,25 @@ const FavoritesPage = (props) => {
     useEffect(() => {
         const getUser = async () => {
             const data = await CanyoneeringAPI.getLoggedInUser(params.userID)
+            console.log(data)
 
-            const canyonArray = []
+            const canyon = []
              for (let i of data) {
                  const canyonObj = await CanyoneeringAPI.fetchCanyonByID(i)
-                 canyonArray.push(canyonObj)
+                 canyon.push(canyonObj)
              }
-             setCanyon(canyonArray)
-            //  console.log(canyonArray)
+             setCanyon(canyon)
+             console.log("canyons", setCanyon)
         }
         getUser()
-    },[])
+    },[params.userID])
 
     return (
         <div>
             <h1> Favorites </h1>
             <FavoriteCanyons canyons={canyon}/>
             <h3>Name: {canyon.canyon_name}</h3>
-                <p>Ratin: {canyon.rating}</p>
+                <p>Rating: {canyon.rating}</p>
                 <p>Length: {canyon.length}</p>
 
         </div>
