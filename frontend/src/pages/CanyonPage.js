@@ -5,8 +5,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// require('dotenv').config()
-
 
 function WeatherApp() {
   const [temperature, setTemperature] = useState("")
@@ -28,10 +26,8 @@ function WeatherApp() {
   // useEffect() ... we use this to react to something else changing
   // we want to get the weather data, anytime we get a new canyon object
   useEffect(() => {
-    console.log(canyon)
     if (canyon != null)
       getWeatherData(canyon.latitude, canyon.longitude)
-
   }, [canyon])
 
   const getWeatherData = (lat, lon) => {
@@ -92,7 +88,7 @@ function CanyonPage(props) {
       return null
     return (
       <div>
-        <h3>Name: {canyon.canyon_name}</h3>
+        <h3>{canyon.canyon_name}</h3>
         <p>Rating: {canyon.rating}</p>
         <p>Length: {canyon.length}</p>
         <p>Gear: {canyon.gear}</p>
@@ -108,26 +104,27 @@ function CanyonPage(props) {
 
 
   return (
-    <div>
-      <h1>Canyon Page</h1>
-      <hr />
-      <div>
-        Current Weather at {canyon.canyon_name}
-        <WeatherApp />
+    <div >
+      <div className="canyonPage">
+        <br></br>
+        <div className="canyonDetails" style={{textAlign:"left"}}>
+          {renderCanyon()}
+        </div>
+        <div className="currentCanyonWeather">
+          Current Weather
+          <WeatherApp />
+        </div>
       </div>
-      <br></br>
-      {renderCanyon()}
+
 
       <div>
         <Link to='/'>Home</Link>
       </div>
       <br />
       <div>
-
         <button onClick={deleteCanyon}>Delete Canyon</button>
-
-
       </div>
+
 
     </div>
 

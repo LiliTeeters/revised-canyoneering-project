@@ -17,9 +17,10 @@ function UserLoginPage(props) {
   }
   // render
   return (
-    <div>
-      <h2>Login User</h2>
-      <hr />
+    <div className="loginForm">
+      {/* <h2>Login User</h2>
+      <hr /> */}
+      <div className="loginBox">
       <Form onSubmit={handleLogin}>
         <Form.Group>
           <Form.Label>Username</Form.Label>
@@ -35,6 +36,7 @@ function UserLoginPage(props) {
           Login
         </Button>  
       </Form>  
+      </div>
     </div>
   )
 }

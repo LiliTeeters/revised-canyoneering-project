@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import UserContext from '../contexts/UserContext.js';
 import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps';
 import { useState, useEffect } from "react";
-import  CanyoneeringAPI  from '../api/CanyoneeringAPI';
+import CanyoneeringAPI from '../api/CanyoneeringAPI';
 
 
 function Map() {
@@ -23,39 +23,49 @@ function HomePage(props) {
 
 
   useEffect(() => {
-    const getCanyons = async() => {
-    await CanyoneeringAPI.fetchCanyons().then((data) => setCanyons(data))
+    const getCanyons = async () => {
+      await CanyoneeringAPI.fetchCanyons().then((data) => setCanyons(data))
     }
     getCanyons()
-  },[])
+  }, [])
 
 
   return (
     <div>
+       <h2>Canyoneering Adventures</h2>
       {
         !isLoggedIn
           ?
-          <div>
-            <div>
-              <Link to='/login'>Login</Link>
+          <div className="loginSignupNav">
+            <div className="loginLink">
+              <Link to='/login' style={{textDecoration:"none", color: "black"}}>Login</Link>
             </div>
-            <div>
-              <Link to='/signup'>Signup</Link>
+            <div className="signupLink">
+              <Link to='/signup' style={{textDecoration:"none", color: "black"}}>Signup</Link>
             </div>
           </div>
           :
-          <div> <button onClick={handleLogout}>Logout</button></div>
+          <div className="logoutAddCanyonNav">
+            {/* <h2>Canyoneering Adventures</h2> */}
+            <div className="addCanyonLink">
+              <Link to='/addcanyon' style={{textDecoration:"none", color: "black"}}>Add Canyon</Link>
+            </div>
+            <div className="logoutButton">
+              <button style={{outline: "none"}} onClick={handleLogout}  >Logout</button>
+            </div>
+            
+          </div>
       }
 
 
-      <h1>Home Page</h1>
+      {/* <h1>Home Page</h1> */}
       {
         user &&
         <div>
           Welcome {user.username}
         </div>
       }
-     
+
       <div className='homePage'>
         {canyons[0] && canyons.map((el, ind) => {
           return (
@@ -64,12 +74,11 @@ function HomePage(props) {
         })}
       </div>
       <br></br>
-        <div><Link to='/addcanyon'>Add Canyon</Link></div>
-        <br></br>
-        <br></br>
+      <br></br>
+      <br></br>
 
 
-      <div style={{ width: '100vw', height: "100vh" }}>
+      <div style={{ width: '80vw', height: "80vh", marginLeft: "auto", marginRight: "auto" }}>
         <WrappedMap
           googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.46&libraries=geometry,drawing,places&key=${API_KEY}`}
           loadingElement={<div style={{ height: "100%" }} />}
@@ -77,7 +86,8 @@ function HomePage(props) {
           mapElement={<div style={{ height: "100%" }} />}
         />
       </div>
-
+      <br /><br />
+      <br />
     </div>
   )
 }

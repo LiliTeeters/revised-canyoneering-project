@@ -2,26 +2,23 @@
 import { Link } from "react-router-dom"
 
 const CanyonCard = (props) => {
-    const {el} = props
-    // const navigate = useNavigate()
+    const { el } = props
 
-// const canyonPage = () => {
-//     // console.log(el)
-//     navigate(`/canyons/${el.id}`)
-// }
-
-    return(
+    return (
         <div className='canyonCard'>
             <img src={'https://www.roadtripryan.com/go/tripimage/maxwidth?size=222&id=0pzP'} alt="" />
 
-            <h1>{el.canyon_name}</h1>
-            <h2>{el.length}</h2>
-            <h2>{el.rating}</h2>
-            {/* <button onClick={canyonPage}>View</button> */}
-
-            {/* LINK example */}
-            <Link to={`/canyons/${el.id}`}>View Canyon Details</Link>
+            <h4>{el.canyon_name}</h4>
+            {/* <br /> */}
+            <h5>{el.rating}</h5>
+            <h5>({el.length})</h5>
             
+            <br />
+            <div className="canyonCardDetails">
+                <Link to={`/canyons/${el.id}`} className="viewDetails" style={{textDecoration:"none"}}>View Canyon Details</Link>
+            </div>
+
+
         </div>
     )
 }

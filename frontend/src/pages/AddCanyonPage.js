@@ -42,10 +42,10 @@ function AddCanyonPage(props) {
     // render
     return (
         <div>
-            <h2>Add Canyon Page</h2>
-            <br />
+            {/* <h2>Add Canyon Page</h2>
+            <br /> */}
 
-
+            <div className="addCanyonForm">
             <Form onSubmit={handleFormSubmit}>
                 <Form.Group>
                     <Form.Label>Canyon Name</Form.Label>
@@ -92,11 +92,25 @@ function AddCanyonPage(props) {
                     <Form.Control placeholder="description" />
                 </Form.Group>
                 <br />
+                <Form.Group>
+                    <Form.Label>Latitude</Form.Label>
+                    <Form.Control placeholder="latitude" />
+                </Form.Group>
+                <br />
+                <Form.Group>
+                    <Form.Label>Longitude</Form.Label>
+                    <Form.Control placeholder="longitude" />
+                </Form.Group>
+                
+                <br/>
                 <Button type="submit">Add Canyon</Button>
             </Form>
+            </div>
             <br />
             <br />
-            <button><NavLink to="/">Back</NavLink></button>
+            <button><NavLink to="/">Home</NavLink></button>
+            <br />
+            <br />
         </div>
     )
 }
