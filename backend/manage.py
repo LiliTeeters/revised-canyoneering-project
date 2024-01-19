@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+# !/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
 
-
+print(sys.path)
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'canyoneering_api.settings')

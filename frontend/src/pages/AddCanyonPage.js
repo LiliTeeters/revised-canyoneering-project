@@ -1,9 +1,8 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import CanyoneeringAPI from '../api/CanyoneeringAPI';
 import { NavLink } from "react-router-dom"
-// import UserContext from "../contexts/UserContext";
-// import { useContext } from "react"
+
 
 function AddCanyonPage(props) {
 

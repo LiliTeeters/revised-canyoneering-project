@@ -1,95 +1,106 @@
 import CanyonCard from "../components/CanyonCard"
 import { Link } from "react-router-dom"
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../contexts/UserContext.js';
-import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps';
-import { useState, useEffect } from "react";
 import CanyoneeringAPI from '../api/CanyoneeringAPI';
+import MapQuestMap from "../components/MapQuest.js";
 
-
-function Map() {
-  return (
-    <GoogleMap defaultZoom={7} defaultCenter={{ lat: 39.320980, lng: -111.093735 }} />
-  );
-}
-const WrappedMap = withScriptjs(withGoogleMap(Map));
 
 function HomePage(props) {
   const { isLoggedIn, handleLogout } = props;
   const userContext = useContext(UserContext);
   const { user } = userContext;
-  const [canyons, setCanyons] = useState([]);
-  const API_KEY = process.env.REACT_APP_MAPS_API;
+  const isAdmin = user && user.isAdmin;
 
+  const [canyons, setCanyons] = useState([]);
+  // const [geocodeResult] = useState(null);
+  const [selectedCanyon, setSelectedCanyon] = useState(null);
+  const API_KEY = process.env.REACT_APP_MAPQUEST_API;
 
   useEffect(() => {
     const getCanyons = async () => {
-      await CanyoneeringAPI.fetchCanyons().then((data) => setCanyons(data))
+      const data = await CanyoneeringAPI.fetchCanyons();
+      if (data) {
+        setCanyons(data);
+      }
+    };
+    getCanyons();
+  }, []);
+
+
+  useEffect(() => {
+    if (canyons.length > 0) {
+      // Example processing: Sort canyons by name
+      const sortedCanyons = [canyons].sort((a, b) => a.canyon_name.localeCompare(b.canyon_name));
+
+      // Set the first canyon as the selected canyon for display
+      setSelectedCanyon(sortedCanyons[0]);
     }
-    getCanyons()
-  }, [])
+  }, [canyons]);
+
 
 
   return (
     <div>
-       <h2>Canyoneering Adventures</h2>
-      {
-        !isLoggedIn
-          ?
-          <div className="loginSignupNav">
-            <div className="loginLink">
-              <Link to='/login' style={{textDecoration:"none", color: "black"}}>Login</Link>
-            </div>
-            <div className="signupLink">
-              <Link to='/signup' style={{textDecoration:"none", color: "black"}}>Signup</Link>
-            </div>
-          </div>
-          :
-          <div className="logoutAddCanyonNav">
-            {/* <h2>Canyoneering Adventures</h2> */}
-            <div className="addCanyonLink">
-              <Link to='/addcanyon' style={{textDecoration:"none", color: "black"}}>Add Canyon</Link>
-            </div>
-            <div className="logoutButton">
-              <button style={{outline: "none"}} onClick={handleLogout}  >Logout</button>
-            </div>
+
+      {/* {!isLoggedIn ?
+        <div className="loginSignupNav">
+          <Link to='/login' style={{ textDecoration: "none", color: "black" }}>Login</Link>
+          <br></br>
+          <Link to='/signup' style={{ textDecoration: "none", color: "black" }}>Signup</Link>
+        </div>
+        :
+        <div className="logoutAddCanyonNav">
+          <Link to='/addcanyon' style={{ textDecoration: "none", color: "black" }}>Add Canyon</Link>
+          <button style={{ outline: "none" }} onClick={handleLogout}>Logout</button>
+        </div>
+      } */}
+
+{!isLoggedIn ?
+        <div className="loginSignupNav">
+          <Link to='/login' style={{ textDecoration: "none", color: "black" }}>Login</Link>
+          <br></br>
+          <Link to='/signup' style={{ textDecoration: "none", color: "black" }}>Signup</Link>
+        </div>
+        :
+        <div className="logoutAddCanyonNav">
+          console.log(user);
+          {isAdmin && (
             
-          </div>
-      }
-
-
-      {/* <h1>Home Page</h1> */}
-      {
-        user &&
-        <div>
-          Welcome {user.username}
+            <Link to='/addcanyon' style={{ textDecoration: "none", color: "black" }}>Add Canyon</Link>
+          )}
+          <button style={{ outline: "none" }} onClick={handleLogout}>Logout</button>
         </div>
       }
 
+      <h2>Canyoneering Adventures</h2>
+      {user &&
+        <div>Welcome {user.username}</div>
+      }
+
       <div className='homePage'>
-        {canyons[0] && canyons.map((el, ind) => {
-          return (
-            <CanyonCard el={el} key={ind} />
-          )
-        })}
+        {canyons[0] && canyons.map((el, ind) => (
+          <CanyonCard el={el} key={ind} />
+        ))}
       </div>
       <br></br>
-      <br></br>
-      <br></br>
 
+      <div style={{ width: '80vw', height: "70vh", marginLeft: "auto", marginRight: "auto", marginBottom: "auto" }}>
 
-      <div style={{ width: '80vw', height: "80vh", marginLeft: "auto", marginRight: "auto" }}>
-        <WrappedMap
-          googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.46&libraries=geometry,drawing,places&key=${API_KEY}`}
-          loadingElement={<div style={{ height: "100%" }} />}
-          containerElement={<div style={{ height: "100%" }} />}
-          mapElement={<div style={{ height: "100%" }} />}
+        <MapQuestMap
+          apiKey={API_KEY}
+          center={[39.320980, -111.093735]}
+          zoom={7}
+          canyons={canyons}
         />
+
+
       </div>
-      <br /><br />
-      <br />
+      <br></br>
+
     </div>
-  )
+
+  );
 }
 
 export default HomePage

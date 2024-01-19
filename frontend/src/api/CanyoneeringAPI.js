@@ -62,35 +62,6 @@ const deleteCanyon = async (canyonID, token) => {
 
 
 
-
-// const addToUserFavorites = async (user, canyonID, token) => {
-//   const url = BASE_URL + `canyons/${canyonID}/`
-//   const init = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(user)
-//   }
-//   return await tryCatchFetch(url, init)
-
-// }
-
-// const addToUserFavorites = async (user, canyonID, token) => {
-//   const url = BASE_URL + `canyons/${canyonID}/`
-//   const init = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//        Authorization: `JWT ${token}`},
-//     body: JSON.stringify(user)
-//   }
-//   return await tryCatchFetch(url, init)
-
-// }
-
-
-
 // ------------------ USER FUNCTIONS -----------//
 const login = (userObject) => {
   console.log(userObject)

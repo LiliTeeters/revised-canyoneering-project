@@ -12,10 +12,10 @@ import AddCanyonPage from './pages/AddCanyonPage';
 import DeleteCanyonPage from './pages/DeleteCanyonPage';
 
 function App() {
-  const [canyons, setCanyons] = useState([])
+  const [canyons] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [ user, setUser ] = useState(null);
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
   
 
   // useEffect(() => {

@@ -23,26 +23,30 @@ function WeatherApp() {
     getCanyon()
   }, [params.canyonID])
 
-  // useEffect() ... we use this to react to something else changing
-  // we want to get the weather data, anytime we get a new canyon object
+
+
   useEffect(() => {
-    if (canyon != null)
-      getWeatherData(canyon.latitude, canyon.longitude)
-  }, [canyon])
+    if (canyon != null) {
+      getWeatherData(canyon.latitude, canyon.longitude);
+    }
+  }, [canyon]);
+    
 
-  const getWeatherData = (lat, lon) => {
+  const getWeatherData = (lat, lon, cancelToken) => {
     axios({
-      method: "GET",
-      url: `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`
+    method: "GET",
+    url: `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}`,
+    cancelToken: cancelToken
     }).then((response) => {
-
-      //Kelvin to Fahrenheit conversion 
-      setTemperature(((response.data.main.temp - 273.15) * 1.8) + 32)
+    setTemperature(((response.data.main.temp - 273.15) * 1.8) + 32);
     }).catch((error) => {
-      console.log(error)
+    if (axios.isCancel(error)) {
+    console.log('Request canceled:', error.message);
+    } else {
+    console.log(error);
+    }
     });
-
-  };
+    };
 
 
   return (
@@ -58,6 +62,8 @@ function WeatherApp() {
     </div>
   );
 };
+
+
 
 function CanyonPage(props) {
   const [canyon, setCanyon] = useState(null)

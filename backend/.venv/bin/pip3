@@ -1,4 +1,6 @@
-#!/Users/lilisbetteeters/Desktop/Code_Platoon/final_project/backend/canyoneering_api/.venv/bin/python3.9
+#!/bin/sh
+'''exec' "/Users/lilisbetteeters/Desktop/Software Career/Code_Platoon/final_project/backend/.venv/bin/python3.11" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys
