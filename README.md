@@ -1,1 +1,1 @@
-# canyoneering-adventures-revised
+# revised-canyoneering-adventures
