@@ -64,7 +64,6 @@ function HomePage(props) {
         </div>
         :
         <div className="logoutAddCanyonNav">
-          console.log(user);
           {isAdmin && (
             
             <Link to='/addcanyon' style={{ textDecoration: "none", color: "black" }}>Add Canyon</Link>

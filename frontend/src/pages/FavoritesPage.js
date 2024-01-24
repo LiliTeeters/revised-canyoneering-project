@@ -14,6 +14,7 @@ const FavoritesPage = (props) => {
             console.log(data)
 
             const canyon = []
+            
              for (let i of data) {
                  const canyonObj = await CanyoneeringAPI.fetchCanyonByID(i)
                  canyon.push(canyonObj)
@@ -27,6 +28,7 @@ const FavoritesPage = (props) => {
     return (
         <div>
             <h1> Favorites </h1>
+        
             <FavoriteCanyons canyons={canyon}/>
             <h3>Name: {canyon.canyon_name}</h3>
                 <p>Rating: {canyon.rating}</p>

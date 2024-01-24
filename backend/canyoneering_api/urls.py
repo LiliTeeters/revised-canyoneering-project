@@ -7,5 +7,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('canyons/', include('canyoneering_app.urls')),
     path('token-auth/', obtain_jwt_token),
-
 ]

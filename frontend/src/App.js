@@ -10,20 +10,14 @@ import UserContext from './contexts/UserContext';
 import SignupPage from './pages/SignupPage';
 import AddCanyonPage from './pages/AddCanyonPage';
 import DeleteCanyonPage from './pages/DeleteCanyonPage';
+import FavoriteCanyons from './components/FavoriteCanyons';
+import FavoritesPage from './pages/FavoritesPage';
 
 function App() {
   const [canyons] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [ user, setUser ] = useState(null);
   const [error] = useState(null);
-  
-
-  // useEffect(() => {
-  //   const getCanyons = async() => {
-  //   await CanyoneeringAPI.fetchCanyons().then((data) => setCanyons(data))
-  //   }
-  //   getCanyons()
-  // },[])
 
   useEffect(() => {
     const getUser = async () => {
@@ -76,7 +70,8 @@ function App() {
           <Route exact path="/signup/" element={<SignupPage/>}/>
           <Route exact path="/addcanyon/" element={<AddCanyonPage/>}/>
           <Route exact path="/canyons/:canyonID/delete/" element={<DeleteCanyonPage />} />
-          {/* <Route exact path="/canyons/:userID/usercanyons/" element={<FavoritesPage/>}/> */}
+          <Route path="/favorites" element={<FavoritesPage />} />
+          
       
         </Routes>
         </UserContext.Provider>

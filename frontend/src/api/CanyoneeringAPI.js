@@ -5,14 +5,14 @@ const tryCatchFetch = async (url, init = null) => {
   try {
     const response = await fetch(url, init)
     if (response.ok) {
-      if(response.status !== 204){
+      if (response.status !== 204) {
         return await response.json()
-        
-      }else{
+
+      } else {
         return ("Okay")
       }
-      
-      
+
+
     }
     else {
       throw new Error(`Bad response: ${response.status} ${response.statusText}`)
@@ -60,6 +60,32 @@ const deleteCanyon = async (canyonID, token) => {
   return await tryCatchFetch(url, init)
 }
 
+const addFavorite = async (userId, canyonId, token) => {
+  const url = `http://localhost:8000/canyons/add_favorite/`;
+  const init = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `JWT ${token}`
+    },
+    body: JSON.stringify({ userId, canyonId }),
+  };
+  return await tryCatchFetch(url, init);
+};
+
+const fetchUserFavorites = async (userId, token) => {
+  const url = `${BASE_URL}favorites/${userId}/`;
+  const init = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `JWT ${token}`
+    }
+  };
+  return await tryCatchFetch(url, init);
+};
+
+
 
 
 // ------------------ USER FUNCTIONS -----------//
@@ -102,6 +128,8 @@ const exportItems = {
   signupUser,
   addCanyon,
   deleteCanyon,
+  addFavorite,
+  fetchUserFavorites
 }
 
 export default exportItems

@@ -2,13 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# class User(models.Model):
-#     user_name = models.CharField(max_length=255)
-#     email = models.CharField(max_length=50)
-    
-#     def __str__(self):
-#         return f"{self.user_name} {self.email}"
-
 class Canyon_Details(models.Model):
     user = models.ManyToManyField(User, related_name='canyon')
     canyon_name = models.CharField(max_length=255)
@@ -26,3 +19,6 @@ class Canyon_Details(models.Model):
     def __str__(self):
         return f"{self.canyon_name} {self.rating} {self.length} {self.gear} {self.rappels} {self.water} {self.flashflood} {self.access} {self.description} {self.latitude} {self.longitude}"
 
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorites')
+    canyon = models.ForeignKey(Canyon_Details, on_delete=models.CASCADE, related_name='favorited_by')
